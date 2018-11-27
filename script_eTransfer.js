@@ -19,7 +19,7 @@ window.onload = function(e) {
 			successImageNode.setAttribute("class", "success-image");
 			var imageNode = document.createElement('img');
 			successImageNode.appendChild(imageNode);
-			imageNode.setAttribute("src", "/DynamicContent/Resources/Images/warning_success.png");
+			imageNode.setAttribute("src", "Images/warning_success.png");
 			var successImageReferenceNode = document.querySelector('.receiptN');
 			successImageReferenceNode.parentNode.insertBefore(successImageNode, successImageReferenceNode);
 				
@@ -38,7 +38,7 @@ window.onload = function(e) {
 			alertImageNode.setAttribute("class", "alert-image");
 			var imageNode = document.createElement('img');
 			alertImageNode.appendChild(imageNode);
-			imageNode.setAttribute("src", "/DynamicContent/Resources/Images/warning_alert.png");
+			imageNode.setAttribute("src", "Images/warning_alert.png");
 			var alertImageReferenceNode = document.querySelector('.confirmation');
 			alertImageReferenceNode.parentNode.insertBefore(alertImageNode, alertImageReferenceNode);
 		}
@@ -52,8 +52,22 @@ window.onload = function(e) {
 			alertImageNode.setAttribute("class", "alert-image");
 			var imageNode = document.createElement('img');
 			alertImageNode.appendChild(imageNode);
-			imageNode.setAttribute("src", "/DynamicContent/Resources/Images/warning_alert.png");
+			imageNode.setAttribute("src", "Images/warning_alert.png");
 			var alertImageReferenceNode = document.querySelector('.showForm');
+			alertImageReferenceNode.parentNode.insertBefore(alertImageNode, alertImageReferenceNode);
+		}
+		
+		//Show Alert Image on Fullfil Confirmation screen
+		function showAlertImageOnFullfilConfirmationScreen()
+		{
+			var confirmationDiv = document.querySelector('.rfmConfirm').classList.add('transfer-confirmation');
+			
+			var alertImageNode = document.createElement('div');
+			alertImageNode.setAttribute("class", "alert-image");
+			var imageNode = document.createElement('img');
+			alertImageNode.appendChild(imageNode);
+			imageNode.setAttribute("src", "Images/warning_alert.png");
+			var alertImageReferenceNode = document.querySelector('.rfmConfirm');
 			alertImageReferenceNode.parentNode.insertBefore(alertImageNode, alertImageReferenceNode);
 		}
 		
@@ -64,7 +78,7 @@ window.onload = function(e) {
 			errorsImageNode.setAttribute("class", "errors-image");
 			var imageNode = document.createElement('img');
 			errorsImageNode.appendChild(imageNode);
-			imageNode.setAttribute("src", "/DynamicContent/Resources/Images/warning_error.png");
+			imageNode.setAttribute("src", "Images/warning_error.png");
 			var errorsImageReferenceNode = document.querySelector('.receiptN');
 			errorsImageReferenceNode.parentNode.insertBefore(errorsImageNode, errorsImageReferenceNode);
 		}
@@ -76,7 +90,7 @@ window.onload = function(e) {
 			errorsImageNode.setAttribute("class", "errors-image");
 			var imageNode = document.createElement('img');
 			errorsImageNode.appendChild(imageNode);
-			imageNode.setAttribute("src", "/DynamicContent/Resources/Images/warning_error.png");
+			imageNode.setAttribute("src", "Images/warning_error.png");
 			var errorsImageReferenceNode = document.querySelector('.errors');
 			errorsImageReferenceNode.parentNode.insertBefore(errorsImageNode, errorsImageReferenceNode);
 		}
@@ -91,7 +105,7 @@ window.onload = function(e) {
 				bottomDisclaimerNode.setAttribute("class", "bottom-disclaimer");
 				var textInsideDiv = document.createElement('div');
 				textInsideDiv.setAttribute("class", "disclaimer-text");
-				textInsideDiv.innerHTML ="<div class='title'>Things to know about INTERAC® e-Transfers:</div><ul><li>INTERAC® e-Transfers can only be sent and received via Canadian financial institutions</li><li>INTERAC® e-Transfers sent via mobile phone can only be sent to Canadian phone numbers.</li><li>The amount and a $1.50 Service Charge will be withdrawn from your account.</br>You may cancel the transfer before the recipient accepts it; however, the service charge will not be refunded.</br>The fee will apply even if you're over the daily eTransfer limit.</li><li>INTERAC® e-Transfers can only be sent from chequing or savings accounts. In order to send an INTERAC® e-Transfer from a different product type, transfer the funds to a chequing or savings account first.</li></ul>";
+				textInsideDiv.innerHTML ="<div class='title'>Things to know about INTERAC® e-Transfers:</div><ul><li>INTERAC® e-Transfers can only be sent and received via Canadian financial institutions</li><li>INTERAC® e-Transfers sent via mobile phone can only be sent to Canadian phone numbers.</li><li>The amount and a $1.50 Service Charge will be withdrawn from your account.</li></ul><div class='left-space'>You may cancel the transfer before the recipient accepts it; however, the service charge will not be refunded.</div><div class='left-space'>The fee will apply even if you're over the daily eTransfer limit.</div><ul><li>INTERAC® e-Transfers can only be sent from chequing or savings accounts. In order to send an INTERAC® e-Transfer from a different product type, transfer the funds to a chequing or savings account first.</li></ul>";
 				bottomDisclaimerNode.appendChild(textInsideDiv);
 				var bottomDisclaimerReferenceNode = document.querySelector('.conclusion');
 				bottomDisclaimerReferenceNode.parentNode.insertBefore(bottomDisclaimerNode, bottomDisclaimerReferenceNode);
@@ -143,6 +157,80 @@ window.onload = function(e) {
 				}
 			}
 		}
+		
+		//Fulfill Request screen
+		if(pageTitle == "Fulfill Request")
+		 {
+			var inputValues = document.querySelectorAll(".input");
+			inputValues[0].classList.add("input-in-line");
+			var requiredAttr = document.querySelectorAll(".required");
+			requiredAttr[3].classList.add("add-padd-top");
+			document.querySelector(".requiredTCs").classList.add("consent-in-line");
+		 }
+		 
+		 //Fulfill Request - Confirm screen
+		 if(pageTitle == "Fulfill Request - Confirm")
+		 {
+			showAlertImageOnFullfilConfirmationScreen();
+				
+			var inputSuccessImageNode = document.createElement('div');
+			inputSuccessImageNode.setAttribute("class", "success-text");
+			var inputErrorImageReferenceNode = document.querySelector('.rfmConfirm');
+			inputErrorImageReferenceNode.parentNode.insertBefore(inputSuccessImageNode, inputErrorImageReferenceNode);
+				
+			document.querySelector('.success-text').textContent = "Please confirm the fullfil request details";
+		 }
+		 
+		 //Fulfill Request - Receipt screen
+		 if(pageTitle == "Fulfill Request - Receipt")
+		 {
+			showSucessImageAndTextReceipN();
+				
+			document.querySelector('.success-text').textContent = "Fullfil request completed";
+				
+			showPrintButton();
+				
+			var dls = document.querySelectorAll("dl");
+			dls[1].classList.add("no-pad-bottom");
+				
+			document.querySelector(".linkN").classList.add("request-button");
+		 }
+		 
+		 //Receive Interac e-Transfer® screen
+		 if(pageTitle == "Receive Interac e-Transfer®")
+		 {
+			var requiredAttr = document.querySelectorAll(".required");
+			requiredAttr[0].classList.add("remove-padd-top");
+			requiredAttr[0].textContent = "You have answered the security question correctly, please indicate whether you would like to accept or decline this transfer";
+		 }
+		 
+		 //Receive Interac e-Transfer® - Confirm screen
+		 if(pageTitle == "Receive Interac e-Transfer® - Confirm")
+		 {
+			showAlertImageWithConfirmationDiv();
+				
+			var inputSuccessImageNode = document.createElement('div');
+			inputSuccessImageNode.setAttribute("class", "success-text");
+			var inputErrorImageReferenceNode = document.querySelector('.confirmation');
+			inputErrorImageReferenceNode.parentNode.insertBefore(inputSuccessImageNode, inputErrorImageReferenceNode);
+				
+			document.querySelector('.success-text').textContent = "Please confirm this operation";
+		 }
+		 
+		 //Decline Interac e-Transfer® - Receipt screen
+		 if(pageTitle == "Decline Interac e-Transfer® - Receipt")
+		 {
+			showSucessImageAndTextReceipN();
+				
+			document.querySelector('.success-text').textContent = "Transfer successfully declined";
+				
+			showPrintButton();
+				
+			var dls = document.querySelectorAll("dl");
+			dls[1].classList.add("no-pad-bottom");
+				
+			document.querySelector(".linkN").classList.add("request-button");
+		 }
 		 
 		 //Add Recipient screen
 		 if(pageTitle == "Add Recipient")
@@ -185,14 +273,14 @@ window.onload = function(e) {
 		 }
 		 
 		 //Request Money via INTERAC e-Transfer® screen
-		 /*if(pageTitle == "Request Money via INTERAC e-Transfer®")
+		 if(pageTitle == "Request Money via INTERAC e-Transfer®")
 		 {
 			var topDisclaimerNode = document.createElement('div');
 			topDisclaimerNode.setAttribute("class", "top-disclaimer");
 			topDisclaimerNode.innerHTML ='Choose a recipient to request money from using Interac e-Transfer or go to Manage Recipients to add a new one';
 			var bottomDisclaimerReferenceNode = document.querySelector('.showForm');
 			bottomDisclaimerReferenceNode.parentNode.insertBefore(topDisclaimerNode, bottomDisclaimerReferenceNode);
-		 }*/
+		 }
 		 
 		 //Request Money - Confirm screen
 		 if(pageTitle == "Request Money - Confirm")
@@ -385,7 +473,7 @@ window.onload = function(e) {
 			var bottomDisclaimerReferenceNode = document.querySelector('.instructions');
 			bottomDisclaimerReferenceNode.parentNode.insertBefore(topDisclaimerNode, bottomDisclaimerReferenceNode);
 			
-			var selects = document.querySelectorAll('.hasDatepicker');
+			var selects = document.querySelectorAll('input[type=text]');
 			
 			for (var i = 0; i < selects.length; i++)
 			{
@@ -462,7 +550,7 @@ window.onload = function(e) {
 		}
 		
 		//Add class to Autodeposit settings screen tables
-		/*if(pageTitle == "Autodeposit Settings")
+		if(pageTitle == "Autodeposit Settings")
 		{
 			var tables = document.querySelectorAll('.registeredMembers');
 			tables[0].classList.add("auto-deposit-settings--first-table");
@@ -474,10 +562,10 @@ window.onload = function(e) {
 			successImageNode.setAttribute("class", "success-image");
 			var imageNode = document.createElement('img');
 			successImageNode.appendChild(imageNode);
-			imageNode.setAttribute("src", "/DynamicContent/Resources/Images/warning_alert.png");
+			imageNode.setAttribute("src", "Images/warning_alert.png");
 			var successImageReferenceNode = document.querySelector('.deleteModalText');
 			successImageReferenceNode.parentNode.insertBefore(successImageNode, successImageReferenceNode);
-		}*/
+		}
 		
 		//Add class to eTransfer History screen table
 		if(pageTitle == "Interac e-Transfer® History")
